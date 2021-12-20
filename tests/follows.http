@@ -1,0 +1,25 @@
+### getFollowers()
+GET {{host}}/follows/followers/87
+Authorization: {{userToken}}
+
+### getFollowed()
+GET {{host}}/follows/followeds/87
+Authorization: {{userToken}}
+
+### addFollow()
+POST {{host}}/follows/1
+Authorization: {{userToken}}
+
+### removeFollow()
+DELETE {{host}}/follows/88
+Authorization: {{userToken}}
+
+### toggleFollow()
+POST {{host}}/follows/toggle
+Authorization: {{userToken}}
+Content-Type: Application/json
+
+{
+  "id_user_followed": "1",
+  "id_user_follower": "1"
+}

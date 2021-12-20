@@ -1,0 +1,57 @@
+### POST register
+POST {{host}}/users/login
+Content-Type: application/json
+
+{
+  "username": "username",
+  "password": "mdp"
+}
+
+> {%
+    client.global.set("usertoken", response.body.token);
+ %}
+
+### GET all posts
+GET {{host}}/posts/
+Authorization: {{usertoken}}
+
+###
+GET {{host}}/posts/allPostWithLikesAndUser/1
+Authorization: {{usertoken}}
+
+### GET all posts from a user
+GET {{host}}/posts/user/1
+Authorization: {{usertoken}}
+
+### GET all posts ordered by number of likes
+GET {{host}}/posts/orderbylike
+
+### GET all liked posts
+GET {{host}}/posts/postsLiked/1
+
+### POST add a new post
+POST {{host}}/posts
+Content-Type: application/json
+
+{
+  "id_user": 1,
+  "image": null,
+  "message": "Rebonjour les oucouc",
+  "parent_post": null
+}
+
+### PUT update a post
+PUT {{host}}/posts/1
+Content-Type: application/json
+
+{
+  "image": null,
+  "message": "Hello World!"
+}
+
+###PUT activate a post
+PUT {{host}}/posts/activate/1
+Authorization: {{usertoken}}
+
+### DELETE a POST
+DELETE {{host}}/posts/4

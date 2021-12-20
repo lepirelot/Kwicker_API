@@ -1,0 +1,87 @@
+
+### login() as admin
+# @name admin
+POST {{host}}/users/login
+Content-Type: application/json
+
+{
+    "username": "test6",
+    "password":"test"
+}
+
+> {% client.global.set("adminToken", response.body.token);%}
+
+### login() as user
+# @name user
+POST {{host}}/users/login
+Content-Type: application/json
+
+{
+    "username":"test",
+    "password":"test"
+}
+
+> {% client.global.set("userToken", response.body.token);%}
+
+
+### register() as user
+# @name user
+POST {{host}}/users/register
+Content-Type: application/json
+
+{
+  "forename":"test",
+  "lastname":"test",
+  "email":"test6.test@student.vinci.be",
+  "username":"test6",
+  "password":"test"
+}
+
+> {% client.global.set("userToken", response.body.token);%}
+
+
+### getProfileInformationsByEmail(email)
+GET {{host}}/users/profile/francois.bardijn@vinci.be
+Authorization: {{userToken}}
+
+### getAllActiveUsers()
+GET {{host}}/users
+Authorization: {{adminToken}}
+
+### disconnect()
+GET {{host}}/users/disconnect
+
+### delete()
+DELETE {{host}}/users/90
+Authorization: {{userToken}}
+
+### updateUserForename()
+PUT {{host}}/users/forename/5
+Content-Type: application/json
+Authorization: {{userToken}}
+
+{
+  "forename":"oui"
+}
+
+### updateUserLastname()
+PUT {{host}}/users/lastname/3
+Content-Type: application/json
+Authorization: {{userToken}}
+
+{
+  "lastname":"oui"
+}
+
+### updateUserBiography()
+PUT {{host}}/users/biography/5
+Content-Type: application/json
+Authorization: {{userToken}}
+
+{
+  "biography":"test"
+}
+
+### activateUser()
+PUT {{host}}/users/activate/3
+Authorization: {{adminToken}}
