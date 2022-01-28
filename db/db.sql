@@ -63,8 +63,8 @@ CREATE TABLE kwicker.reports
 CREATE TABLE kwicker.messages
 (
     id_message         SERIAL PRIMARY KEY,
-    id_sender          INTEGER NOT NULL CHECK ( id_sender <> messages.id_recipient ),
-    id_recipient       INTEGER NOT NULL CHECK ( id_recipient <> messages.id_sender ),
+    id_sender          INTEGER NOT NULL CHECK ( id_sender <> id_recipient ),
+    id_recipient       INTEGER NOT NULL,
     message            TEXT NOT NULL CHECK ( message <> '' ),
     date_creation      TIMESTAMP    NOT NULL DEFAULT NOW(),
     FOREIGN KEY (id_sender) REFERENCES kwicker.users (id_user),

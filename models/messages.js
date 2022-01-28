@@ -16,11 +16,11 @@ class Messages {
 
     /**
      * Get all messages for a conversation
-     * @param id_sender
-     * @param id_recipient
+     * @param id_user
+     * @param id_contact
      * @returns {Promise<*>}
      */
-    async getMessages(id_sender, id_recipient) {
+    async getMessages(id_user, id_contact) {
         const query = {
             text: `SELECT id_message,
                           id_sender,
@@ -31,9 +31,8 @@ class Messages {
                    WHERE (id_sender = $1 AND id_recipient = $2)
                       OR (id_sender = $2 AND id_recipient = $1)
                    ORDER BY id_message`,
-            values: [id_sender, id_recipient]
+            values: [id_user, id_contact]
         };
-
         try {
             const {rows} = await db.query(query);
             decrypt(rows);
@@ -113,7 +112,7 @@ class Messages {
         };
         try {
             const {rows} = await db.query(query);
-            return rows[0];
+            return rows;
         } catch (e) {
             console.log(e.stack);
             throw new Error("Error while getting the last conversation id_recipient.");

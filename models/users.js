@@ -183,6 +183,8 @@ class Users {
       values: [body.forename, body.lastname, body.email, body.username, hashedPassword]
     };
     try {
+      console.log(hashedPassword)
+      console.table(query)
       const result = await db.query(query);
       return result.rowCount;
     } catch (e) {

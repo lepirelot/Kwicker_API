@@ -1,7 +1,6 @@
 const express = require("express");
 const {Messages} = require("../models/messages");
 const {authorizeUser} = require("../utils/authorize");
-const Console = require("console");
 
 const router = express.Router();
 const messagesModel = new Messages();
@@ -17,10 +16,10 @@ const messagesModel = new Messages();
 *
 **/
 
-router.get("/getMessages/:id_sender/:id_recipient", authorizeUser, async (req, res) => {
+router.get("/getMessages/:id_user/:id_contact", authorizeUser, async (req, res) => {
     console.log("GET/ messages");
     try {
-        const messages = await messagesModel.getMessages(req.params.id_sender, req.params.id_recipient);
+        const messages = await messagesModel.getMessages(req.params.id_user, req.params.id_contact);
         if(messages.length === 0)
             return res.sendStatus(404).end();
         return res.json(messages);
@@ -66,7 +65,7 @@ router.get("/lastConversationWith/:id_sender", authorizeUser, async (req, res) =
 });
 
 router.get("/conversationWith/:id_user", authorizeUser, async (req, res) => {
-    console.log("GET/ lastConversationWith");
+    console.log("GET/ conversationWith");
     try {
         const recipient = await messagesModel.getConversationWith(req.params.id_user);
         if(!recipient)
@@ -90,6 +89,7 @@ router.get("/conversationWith/:id_user", authorizeUser, async (req, res) => {
 
 router.post("/", authorizeUser, async (req, res) => {
     const body = req.body;
+    console.log(body)
     if(!body ||
         (body.hasOwnProperty("id_sender") && body.id_sender == "") ||
         (body.hasOwnProperty("id_recipient") && body.id_recipient == "") ||
