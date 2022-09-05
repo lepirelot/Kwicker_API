@@ -195,7 +195,7 @@ class Posts {
             text: `INSERT INTO kwicker.posts (id_user, image, message, parent_post)
                    VALUES ($1, $2, $3, $4)`,
             values: [body.id_user,
-                     escape(body.image),
+                     body.image ? escape(body.image) : null,
                      escape(body.message),
                      body.parent_post]
         };
