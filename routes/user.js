@@ -73,6 +73,7 @@ router.delete("/:idUser", authorizeUser, async function(req, res, next) {
 
 // Register
 router.post("/register", async function (req, res, next) {
+  console.log("Routes --> register");
   if (!req.body ||
       (req.body.hasOwnProperty("forename") && req.body.forename == "") ||
       (req.body.hasOwnProperty("lastname") && req.body.lastname == "") ||
@@ -86,7 +87,6 @@ router.post("/register", async function (req, res, next) {
 
   req.session.idUser = authenticatedUser.idUser;
   req.session.token = authenticatedUser.token;
-
   return res.json(authenticatedUser);
 });
 

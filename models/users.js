@@ -176,6 +176,7 @@ class Users {
 **/
 
   async addUser(body) {
+    console.log("Routes --> addUser");
     const hashedPassword = await bcrypt.hash(body.password, saltRounds);
     const query = {
       name: 'insert-user',
@@ -183,8 +184,6 @@ class Users {
       values: [body.forename, body.lastname, body.email, body.username, hashedPassword]
     };
     try {
-      console.log(hashedPassword)
-      console.table(query)
       const result = await db.query(query);
       return result.rowCount;
     } catch (e) {
@@ -216,6 +215,7 @@ class Users {
   }
 
   async register(body) {
+    console.log("Models --> register");
     const rowCount = await this.addUser(body);
     if (rowCount === 0) return;
     return await this.login(body);
