@@ -23,7 +23,7 @@ CREATE TABLE kwicker.posts
 (
     id_post         SERIAL PRIMARY KEY,
     id_user         INTEGER      NOT NULL,
-    image           VARCHAR(300) CHECK (image <> '' OR image IS NULL),
+    image           BYTEA,
     message         VARCHAR(300) NOT NULL CHECK (message <> ''),
     parent_post     INTEGER,
     is_removed      BOOLEAN      NOT NULL DEFAULT FALSE,
