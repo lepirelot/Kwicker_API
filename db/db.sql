@@ -104,7 +104,7 @@ CREATE TRIGGER trigger_delete_like
 EXECUTE PROCEDURE kwicker.delete_like();
 
 INSERT INTO kwicker.users (forename, lastname, email, username , password)
-VALUES ('Kwicker', 'Kwicker', 'kwicker@kwicker.com', 'Kwicker', '$2b$10$GI9laQSpjGBRdvhoL/Pnweb2opKqqFbuB0KQwG6maZu.MO3PANHNe')
+VALUES ('Kwicker', 'Kwicker', 'kwicker@kwicker.com', 'Kwicker', '$2b$10$GI9laQSpjGBRdvhoL/Pnweb2opKqqFbuB0KQwG6maZu.MO3PANHNe');
 
 INSERT INTO kwicker.posts (id_user, message)
 VALUES (1, 'Bienvenue sur Kwicker, ici on KWICKS!')
