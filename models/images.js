@@ -4,6 +4,22 @@ class Images {
   constructor() {
   }
 
+  async getProfileImage(idUser) {
+    const query = {
+      text: `SELECT image
+             FROM kwicker.users
+             WHERE id_user = $1`,
+      values: [idUser]
+    };
+    try {
+      const rows = await db.query(query);
+      return rows;
+    } catch (e) {
+      console.log(e.stack);
+      return undefined;
+    }
+  }
+
   async addProfileImage(idUser, imageBase64) {
     const query = {
       text: `UPDATE kwicker.users

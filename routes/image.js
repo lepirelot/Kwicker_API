@@ -8,6 +8,32 @@ const {Users} = require("../models/users");
 const usersModel = new Users();
 const imageModel = new Images();
 
+/*
+*
+* ░██████╗░███████╗████████╗
+* ██╔════╝░██╔════╝╚══██╔══╝
+* ██║░░██╗░█████╗░░░░░██║░░░
+* ██║░░╚██╗██╔══╝░░░░░██║░░░
+* ╚██████╔╝███████╗░░░██║░░░
+* ░╚═════╝░╚══════╝░░░╚═╝░░░
+*
+**/
+
+router.get("/profile/:id", authorizeUser, async function(req, res, next) {
+  return res.json(await imageModel.getProfileImage(req.params.idUser));
+});
+
+/*
+*
+*  ██╗░░░██╗██████╗░██████╗░░█████╗░████████╗███████╗
+*  ██║░░░██║██╔══██╗██╔══██╗██╔══██╗╚══██╔══╝██╔════╝
+*  ██║░░░██║██████╔╝██║░░██║███████║░░░██║░░░█████╗░░
+*  ██║░░░██║██╔═══╝░██║░░██║██╔══██║░░░██║░░░██╔══╝░░
+*  ╚██████╔╝██║░░░░░██████╔╝██║░░██║░░░██║░░░███████╗
+*  ░╚═════╝░╚═╝░░░░░╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░╚══════╝
+*
+**/
+
 router.put("/profile", authorizeUser, async function(req, res, next) {
   if (!req.body
       || (req.body.hasOwnProperty("idUser") && req.body.idUser == "")
