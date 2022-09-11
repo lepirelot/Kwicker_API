@@ -118,6 +118,7 @@ class Users {
                     lastname,
                     email,
                     username,
+                    image,
                     is_active,
                     is_admin,
                     biography,
