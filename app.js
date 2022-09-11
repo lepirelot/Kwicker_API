@@ -9,6 +9,7 @@ var followRouter = require('./routes/follow');
 var postRouter = require("./routes/post");
 var likeRouter = require("./routes/like");
 var messageRouter = require("./routes/message");
+var imageRouter = require("./routes/image");
 
 var app = express();
 
@@ -34,5 +35,6 @@ app.use('/follows', followRouter);
 app.use("/posts", postRouter);
 app.use("/likes", likeRouter);
 app.use("/messages", messageRouter);
+app.use("/images", imageRouter);
 
 module.exports = app;
